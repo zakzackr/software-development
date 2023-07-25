@@ -51,7 +51,7 @@ class Main{
             new Student(24, 1, "Peter", 12, 1.75)
         };
 
-        // test caseを作成する
+        // black-box testing
         // testcase1: 最年長である学生のうち背の最も高い生徒はid=13のCameron
         System.out.println(Student.choseStudent(studentList1).studentId == 13);
         // testcase2: 最年長である学生のうち背の最も高い生徒はid=21のSimon
