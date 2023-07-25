@@ -1,0 +1,60 @@
+class Student{
+    public int studentId;
+    public int grade;
+    public String name;
+    public int age;
+    public double height;
+
+    public Student(int studentId, int grade, String name, int age, double height){
+        this.studentId = studentId;
+        this.grade = grade;
+        this.name = name;
+        this.age = age;
+        this.height = height;
+    }
+
+    // studentListを入力として受け取り、最年長である学生のうち背の最も高い生徒を検索する関数を作成する
+    // 年齢、身長も同じ学生が存在する場合は、idが若い方を優先する
+    public static Student choseStudent(Student[] studentList){
+        int oldest = studentList[0].age;
+        int studentIdx = 0;
+
+        for (int i = 1; i < studentList.length; i++){
+            if (studentList[i].age > oldest){
+                oldest = studentList[i].age;
+                studentIdx = i;
+            }
+            else if (studentList[i].age == oldest){
+                if (studentList[i].height > studentList[studentIdx].height) studentIdx = i;
+            }
+        }
+
+        return studentList[studentIdx];
+    }
+}
+
+class Main{
+    public static void main(String[] args){
+        Student[] studentList1 = new Student[]{
+            new Student(10, 2, "John", 14, 1.81),
+            new Student(11, 3, "Bob", 14, 1.75),
+            new Student(12, 1, "Taylor", 12, 1.61),
+            new Student(13, 3, "Cameron", 15, 1.75),
+            new Student(14, 1, "Adam", 13, 1.82)
+        };
+
+        Student[] studentList2 = new Student[]{
+            new Student(20, 2, "Kelly", 14, 1.58),
+            new Student(21, 3, "Simon", 14, 1.75),
+            new Student(22, 1, "Amy", 12, 1.61),
+            new Student(23, 3, "Jack", 14, 1.75),
+            new Student(24, 1, "Peter", 12, 1.75)
+        };
+
+        // test caseを作成する
+        // testcase1: 最年長である学生のうち背の最も高い生徒はid=13のCameron
+        System.out.println(Student.choseStudent(studentList1).studentId == 13);
+        // testcase2: 最年長である学生のうち背の最も高い生徒はid=21のSimon
+        System.out.println(Student.choseStudent(studentList2).studentId == 21);
+    }
+}
